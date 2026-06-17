@@ -12,4 +12,12 @@ jobs:
         run: echo "Hello Pandey"
       - name: list files
         run: ls -la
+env:
+  FIRST_NAME: NAHID
+env:
+  LAST_NAME: ALI
+
+      - name: Greetings
+        run: echo "Hello $FIRST_NAME $LAST_NAME"
+        
    

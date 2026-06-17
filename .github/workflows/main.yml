@@ -18,13 +18,8 @@ jobs:
          run: echo "Hello Pandey"
        - name: list files
          run: ls -la
-  second_job:
-    needs: my_first_job
-    name: second job
-    runs-on: ubuntu-latest
-    steps:
-      - name: Greetings
-        run: echo "Hello $FIRST_NAME $LAST_NAME"
+        - name: Greetings
+          run: echo "Hello $FIRST_NAME $LAST_NAME"
 
 
 

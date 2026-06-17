@@ -16,7 +16,7 @@ env:
   FIRST_NAME: NAHID
 env:
   LAST_NAME: ALI
-
+  second_job:
       - name: Greetings
         run: echo "Hello $FIRST_NAME $LAST_NAME"
         

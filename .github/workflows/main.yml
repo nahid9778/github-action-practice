@@ -2,24 +2,19 @@ name: practice
 
 on:
   push: 
-env:
-  FIRST_NAME: NAHID
-  
+
 jobs:
   my_first_job:
-    name: my first job
+    name: az login
     runs-on: ubuntu-latest
-    env:
-      LAST_NAME: ALI
     steps:
        - name: Checkout
          uses: actions/checkout@v6.0.3
-       - name: Greetings
-         run: echo "Hello Pandey"
-       - name: list files
-         run: ls -la
-       - name: Greetings
-         run: echo "Hello $FIRST_NAME $LAST_NAME"
+       - name: Azure Login
+         uses: Azure/login@v3
+         with:
+           creds: ${{secrets.AZURE_CREDENTIALS}}
+   
 
 
 

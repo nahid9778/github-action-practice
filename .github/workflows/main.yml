@@ -2,7 +2,10 @@ name: practice
 
 on:
   workflow_dispatch:
-
+env:
+  FIRST_NAME: NAHID
+  LAST_NAME: ALI
+  
 jobs:
   my_first_job:
     name: my first job
@@ -14,11 +17,13 @@ jobs:
          run: echo "Hello Pandey"
        - name: list files
          run: ls -la
-env:
-  FIRST_NAME: NAHID
-  LAST_NAME: ALI
-  second_job:
-    - name: Greetings
-      run: echo "Hello $FIRST_NAME $LAST_NAME"
-        
+
+    second_job:
+      name: second job
+      runs_on: ubuntu-latest
+      steps:
+          - name: greetings
+            run: echo "Hello $FIRST_NAME $LAST_NAME"
+  
+            
    

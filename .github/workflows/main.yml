@@ -4,12 +4,13 @@ on:
   push: 
 env:
   FIRST_NAME: NAHID
-  LAST_NAME: ALI
   
 jobs:
   my_first_job:
     name: my first job
     runs-on: ubuntu-latest
+    env:
+      LAST_NAME: ALI
     steps:
        - name: Checkout
          uses: actions/checkout@v6.0.3

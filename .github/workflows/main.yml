@@ -10,4 +10,6 @@ jobs:
     steps:
       - name: Greetings
         run: echo "Hello Pandey"
+      - name: list files
+        run: ls -la
    

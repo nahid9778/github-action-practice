@@ -1,7 +1,7 @@
 name: practice
 
 on:
-  workflow_dispatch:
+  push: 
 env:
   FIRST_NAME: NAHID
   LAST_NAME: ALI
@@ -22,7 +22,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Greetings
-        run: echo "Hello #FIRST_NAME $LAST_NAME"
+        run: echo "Hello $FIRST_NAME $LAST_NAME"
 
 
 

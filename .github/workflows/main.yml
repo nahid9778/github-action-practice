@@ -21,7 +21,7 @@ jobs:
     name: second job
     runs-on: ubuntu-latest
     steps:
-      - name: greetings
+      - name: Greetings
         run: echo "Hello #FIRST_NAME $LAST_NAME"
 
 

@@ -15,12 +15,14 @@ permissions:
 #   ARM_CLIENT_ID: ${{secrets.AZURE_CLIENT_ID}}
 #   ARM_TENANT_ID: ${{ secrets.AZURE_TENANT_ID }}
 #   ARM_SUBSCRIPTION_ID: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
-#   With OIDC need to add two entity pullrequest and branch -main  
+#   With OIDC need to add two entity pullrequest and branch with value main  
+#   With OIDC we can run through environemnt with value dev
   
 jobs:
   terraform_init_plan:
     name: Terraform Init and Plan
     runs-on: ubuntu-latest
+    environment: dev
     steps:
       - name: Terraform Septup
         uses: hashicorp/setup-terraform@v4     #rapper hai #github marketplace se lana hai by serching setup terraform

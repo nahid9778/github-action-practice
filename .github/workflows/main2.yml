@@ -1,1 +1,48 @@
+name: Github action practice
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - develop
+      - main
+  
+permissions:
+  id-token: write
+  contents: read
+env: #for Azure Login with OIDC
+  ARM_CLIENT_ID: ${{secrets.AZURE_CLIENT_ID}}
+  ARM_TENANT_ID: ${{ secrets.AZURE_TENANT_ID }}
+  ARM_SUBSCRIPTION_ID: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
+  ARM_USE_OIDC: true
+  # With OIDC need to add two entity pullrequest and branch with value main  
+  # With OIDC we can run through environemnt with value dev
+  
+jobs:
+  terraform_init_plan:
+    name: Terraform Init and Plan
+    runs-on: ubuntu-latest
+    environment: dev
+    steps:
+      - name: Terraform Septup
+        uses: hashicorp/setup-terraform@v4     #rapper hai #github marketplace se lana hai by serching setup terraform
+        
+      - name: Checkout Repository  
+        uses: actions/checkout@v6.0.3     #rapper hai #github marketplace se lana hai by serching checkout
+        
+      - name: Terraform Init
+        run: terraform init
+        
+      - name: Terraform Validate
+        run: terraform validate
+        
+      - name: Terraform Plan
+        run: terraform plan
+        
+      - name: Terraform Apply
+        if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+        run: terraform apply -auto-approve
 
+
+            

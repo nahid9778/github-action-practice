@@ -1,7 +1,12 @@
 name: Github action practice
-
 on:
-  push: 
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - develop
+      - main
   
 permissions:
   id-token: write
@@ -22,6 +27,34 @@ jobs:
            subscription-id: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
        - name: run az cli
          run: az account show
+  terraform_init_plan:
+    name: Terraform Init and Plan
+    runs-on: ubuntu-latest
+    steps:
+      - name: Terraform Septup
+        uses: hashicorp/setup-terraform@v4     #rapper hai #github marketplace se lana hai by serching setup terraform
+        # with:
+        #   terraform_version: "1.14.6"     
+        # run: |
+        #   wget -O - https://apt.releases.hashicorp.com/gpg | sudo gpg --dearmor -o /usr/share/keyrings/hashicorp-archive-keyring.gpg
+        #   echo "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/hashicorp-archive-keyring.gpg] https://apt.releases.hashicorp.com $(grep -oP '(?<=UBUNTU_CODENAME=).*' /etc/os-release || lsb_release -cs) main" | sudo tee /etc/apt/sources.list.d/hashicorp.list
+        #   sudo apt update && sudo apt install terraform
+        
+      - name: Checkout Repository  
+        uses: actions/checkout@v6.0.3     #rapper hai #github marketplace se lana hai by serching checkout
+        
+      - name: Terraform Init
+        run: terraform init
+        
+      - name: Terraform Validate
+        run: terraform validate
+        
+      - name: Terraform Plan
+        run: terraform plan
+        
+      - name: Terraform Apply
+        if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+        run: terraform apply -auto-approve
 
 
             

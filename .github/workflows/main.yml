@@ -2,7 +2,11 @@ name: practice
 
 on:
   push: 
-
+  
+permissions:
+  id-token: write
+  contents: read
+  
 jobs:
   azure_login:
     name: az login
